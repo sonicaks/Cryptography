@@ -30,7 +30,7 @@ int main() {
     cin >> plain;
 
     string key;
-    cout << "Enter key: ";
+    cout << "Enter key text: ";
     cin >> key;
 
     string cipher = encode(plain, key);
