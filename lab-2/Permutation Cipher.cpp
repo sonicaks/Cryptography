@@ -61,8 +61,8 @@ int main() {
     int block;
     cout << "Enter block size: ";
     cin >> block;
+    
     int perm[block];
-
     cout << "Enter permutation key:\n";
     for (int i = 0; i < block; i++) {
         cout << i << " ";
