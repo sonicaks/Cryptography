@@ -10,6 +10,7 @@ string encode(string plain, string key) {
         int k = key[j] - 'a';
         cipher += (char)((p + k) % 26 + 'a');
     }
+
     return cipher;
 }
 
@@ -21,6 +22,7 @@ string decode(string cipher, string key) {
         int k = key[j] - 'a';
         plain += (char)(((c - k) % 26 + 26) % 26 + 'a');
     }
+    
     return plain;
 }
 
