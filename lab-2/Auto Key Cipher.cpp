@@ -10,6 +10,7 @@ string encode(string plain, int key) {
         if (i >= 1) k = plain[i - 1] - 'a';
         cipher += (char)((p + k) % 26 + 'a');
     }
+    
     return cipher;
 }
 
