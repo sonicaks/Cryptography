@@ -22,6 +22,7 @@ string decode(string cipher, int key) {
         if (i >= 1) k = plain[i - 1] - 'a';
         plain += (char)(((c - k) % 26 + 26) % 26 + 'a');
     }
+    
     return plain;
 }
 
