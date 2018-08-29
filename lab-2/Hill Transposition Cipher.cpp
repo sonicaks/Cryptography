@@ -27,7 +27,9 @@ string encode(string plain, int block, int *perm) {
         for (int j = 0; j < col; j++) {
             permMat[i][j] = 0;
         }
-        permMat[i][perm[i]] = 1;
+    }
+    for (int i = 0; i < col; i++) {
+        permMat[perm[i]][i] = 1;
     }
 
     int res[row][col];
@@ -46,8 +48,8 @@ string encode(string plain, int block, int *perm) {
     mul((int *)res, (int *)permMat, (int *)prod, row, col);
 
     string cipher = "";
-    for (int j = 0; j < col; j++) {
-        for (int i = 0; i < row; i++) {
+    for (int i = 0; i < row; i++) {
+        for (int j = 0; j < col; j++) {
             cipher += (char)(prod[i][j] + 'A');
         }
     }
@@ -66,12 +68,12 @@ string decode(string cipher, int block, int *perm) {
         }
     }
     for (int i = 0; i < col; i++) {
-        invPermMat[perm[i]][i] = 1;
+        invPermMat[i][perm[i]] = 1;
     }
 
     int res[row][col];
-    for (int j = 0, k = 0; j < col; j++) {
-        for (int i = 0; i < row; i++) {
+    for (int i = 0, k = 0; i < row; i++) {
+        for (int j = 0; j < col; j++) {
             res[i][j] = cipher[k++] - 'A';
         }
     }
