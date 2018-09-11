@@ -69,7 +69,7 @@ int main() {
 	
 	cout << "Generated keys are: ";
 	for (int i = 0; i < genKeys.size(); i++) {
-		cout <<genKeys[i] << " ";
+		cout << genKeys[i] << " ";
 	}
 	cout << "\n";
 
