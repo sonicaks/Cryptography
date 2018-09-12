@@ -33,12 +33,15 @@ string computeXor(string text, string key) {
 
 string encode(string plain, vector<string> &genKeys) {
 	string cipher = "";
+	cout << "Decimal plain text:\t";
 	for (int i = 0; i < plain.length(); i++) {
 		int p = plain[i] - 'A';
 		string s = toBinary(p);
+		cout << s << " ";
 		genKeys.push_back(generate());
 		cipher += computeXor(s, genKeys.back());
 	}
+	cout << "\n";
 	return cipher;
 }
 
@@ -61,22 +64,22 @@ string decode(string cipher, vector<string> &genKeys) {
 
 int main() {
 	string plain;
-	cout << "Enter plain text: ";
+	cout << "Enter plain text:\t";
 	cin >> plain;
 	
 	vector<string> genKeys;
 	string cipher = encode(plain, genKeys);
 	
-	cout << "Generated keys are: ";
+	cout << "Keys are:\t\t";
 	for (int i = 0; i < genKeys.size(); i++) {
 		cout << genKeys[i] << " ";
 	}
 	cout << "\n";
 
-	cout << "Cipher text is: " << cipher << "\n";
+	cout << "Cipher text is:\t\t" << cipher << "\n";
 
 	string decipher = decode(cipher, genKeys);
-	cout << "Decipher text is: " << decipher << "\n";
+	cout << "Decipher text is:\t" << decipher << "\n";
 	
 	return 0;
 }
