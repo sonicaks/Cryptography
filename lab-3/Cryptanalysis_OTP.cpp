@@ -19,6 +19,26 @@ int mmi(int n) {
     return 1;
 }
 
+string toBinary(int n) {
+    string res = "";
+    for (int i = 0; i < 5; i++) {
+        if ((1 << i) & n) res += '1';
+        else res += '0';
+    }
+    reverse(res.begin(), res.end());
+    return res;
+}
+
+string computeXor(string a, string b) {
+    string res = "";
+    for (int i = 0; i < 5; i++) {
+        int x = a[i] - '0';
+        int y = b[i] - '0';
+        res += (char)(x ^ y + '0');
+    }
+    return res;
+}
+
 pair<int, int> computeAB(int S[]) {
     // S0
     // S1 = A * S0 + B mod 26
@@ -30,19 +50,50 @@ pair<int, int> computeAB(int S[]) {
     return make_pair(A, B);
 }
 
+string encode(string plain, int S[]) {
+    string cipher = "";
+    for (int i = 0, l = 0; i < 15; i += 5, l++) {
+        string p = "";
+        for (int j = i; j < i + 5; j++) {
+            p += plain[j];
+        }
+        string k = toBinary(S[l]);
+        cipher += computeXor(p, k);
+    }
+    return cipher;
+}
+
 int main() {
     string plain;
-    cout << "Enter plain text: ";
+    cout << "Enter plain text:\t";
     cin >> plain;
+
+    string cipher;
+    cout << "Enter cipher text:\t";
+    cin >> cipher;
+
+    string key = "";
+    for (int i = 0; i < 15; i++) {
+        int p = plain[i] - '0';
+        int c = cipher[i] - '0';
+        key += (char)(p ^ c + '0');
+    }
+    cout << "Key is:\t\t\t" << key << "\n";
 
     int S[3];
     for (int i = 0, k = 0; i < 15; i += 5, k++) {
         string s = "";
         for (int j = i; j < i + 5; j++) {
-            s += plain[j];
+            s += key[j];
         }
         S[k] = toDecimal(s);
     }
+
+    cout << "Key in decimal is:\t";
+    for (int i = 0; i < 3; i++) {
+        cout << S[i] << " ";
+    }
+    cout << "\n";
 
     int A, B;
     pair<int, int> res = computeAB(S);
@@ -51,9 +102,8 @@ int main() {
 
     cout << "Values of S0, A, B are: " << S[0] << " " << A << " " << B << "\n";
 
-    // cout << S[0] << " " << (S[0] * A + B) % 26 << " " << (S[1] * A + B) % 26 << "\n";
-
-    // cout << S[0] << " " << S[1] << " " << S[2] << "\n";
+    string encoded = encode(plain, S);
+    cout << "Cipher text is:\t\t" << encoded << "\n";
 
     return 0;
 }
