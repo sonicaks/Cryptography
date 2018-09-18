@@ -96,6 +96,8 @@ string decode(string cipher, string key) {
 
 int main() {
     string plain;
+    // Plain text entered should be of 8 bits in hexadecimal
+    // Eg: ABCD123E
     cout << "Enter plain text:\t";
     cin >> plain;
 
