@@ -73,9 +73,17 @@ string encode(string plain, string key) {
         for (int i = 4 * r - 3 - 1; i < 4 * r + 4; i++) {
             roundKey += key[i];
         }
+        cout << "\nRound Number " << r << ":" << "\n";
+        cout << "Cipher is:\t\t" << cipher << "\n";
+        cout << "Round key is:\t\t" << roundKey << "\n";
         cipher = XOR(cipher, roundKey);
+        cout << "XOR is:\t\t\t" << cipher << "\n";
         cipher = SBOX(cipher);
-        if (r != 4) cipher = PBOX(cipher);
+        cout << "SBOX is:\t\t" << cipher << "\n";
+        if (r != 4) {
+            cipher = PBOX(cipher);
+            cout << "PBOX is:\t\t" << cipher << "\n";
+        }
     }
     return cipher;
 }
@@ -87,9 +95,17 @@ string decode(string cipher, string key) {
         for (int i = 4 * r - 3 - 1; i < 4 * r + 4; i++) {
             roundKey += key[i];
         }
-        if (r != 4) plain = invPBOX(plain);
+        cout << "\nRound Number " << (4 - r + 1) << ":" << "\n";
+        cout << "Plain is:\t\t" << plain << "\n";
+        cout << "Round key is:\t\t" << roundKey << "\n";
+        if (r != 4) {
+            plain = invPBOX(plain);
+            cout << "invPBOX is:\t\t" << plain << "\n";
+        }
         plain = invSBOX(plain);
+        cout << "invSBOX is:\t\t" << plain << "\n";
         plain = XOR(plain, roundKey);
+        cout << "XOR is:\t\t\t" << plain << "\n";
     }
     return plain;
 }
@@ -102,12 +118,15 @@ int main() {
     cin >> plain;
 
     string key = generate(24);
+    cout << "\nGenerated key is:\t" << key << "\n";
 
+    cout << "\n*************ENCRYPTION*************\n";
     string cipher = encode(plain, key);
-    cout << "Encoded text is:\t" << cipher << "\n";
+    cout << "\nEncoded text is:\t" << cipher << "\n";
 
+    cout << "\n*************DECRYPTION*************\n";
     string decipher = decode(cipher, key);
-    cout << "Decoded text is:\t" << decipher << "\n";
+    cout << "\nDecoded text is:\t" << decipher << "\n";
 
     return 0;
 }
