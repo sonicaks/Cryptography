@@ -283,7 +283,7 @@ string encode(string plain, vector<string> roundKey) {
         string nxtLeft = XOR(left, f(right, roundKey[rnd]));
         string nxtRight = right;
         if (rnd != 15) swap(nxtLeft, nxtRight);
-        cout << nxtLeft << "\t" << nxtRight << "\n";
+        cout << nxtLeft << "\t" << nxtRight << "\t" << roundKey[rnd] << "\n";
         cipher = nxtLeft + nxtRight;
     }
     return cipher;
@@ -297,7 +297,7 @@ string decode(string cipher, vector<string> roundKey) {
         string nxtLeft = XOR(left, f(right, roundKey[rnd]));
         string nxtRight = right;
         if (rnd != 0) swap(nxtLeft, nxtRight);
-        cout << nxtLeft << "\t" << nxtRight << "\n";
+        cout << nxtLeft << "\t" << nxtRight << "\t" << roundKey[rnd] << "\n";
         plain = nxtLeft + nxtRight;
     }
     return plain;
