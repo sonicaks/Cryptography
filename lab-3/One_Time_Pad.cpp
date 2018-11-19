@@ -35,7 +35,7 @@ string encode(string plain, vector<string> &genKeys) {
 	string cipher = "";
 	cout << "Decimal plain text:\t";
 	for (int i = 0; i < plain.length(); i++) {
-		int p = plain[i] - 'A';
+		int p = plain[i] - 'a';
 		string s = toBinary(p);
 		cout << s << " ";
 		genKeys.push_back(generate());
@@ -50,7 +50,7 @@ char toDecimal(string s) {
 	for (int i = 0; i < s.length(); i++) {
 		val = val * 2 + (s[i] - '0');
 	}
-	return (char)(val + 'A');
+	return (char)(val + 'a');
 }
 
 string decode(string cipher, vector<string> &genKeys) {
