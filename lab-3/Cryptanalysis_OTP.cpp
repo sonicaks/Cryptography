@@ -65,11 +65,11 @@ string encode(string plain, int S[]) {
 
 int main() {
     string plain;
-    cout << "Enter plain text:\t";
+    cout << "Enter plain text (binary 16 bit):\t";
     cin >> plain;
 
     string cipher;
-    cout << "Enter cipher text:\t";
+    cout << "Enter cipher text (binary 16 bit):\t";
     cin >> cipher;
 
     string key = "";
